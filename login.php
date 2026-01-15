@@ -52,36 +52,37 @@
             <h2 class="h4 mb-3">No account? Sign up</h2>
             <p class="fs-sm text-muted mb-4">Registration takes less than a minute but gives you full control over your
                 orders.</p>
-            <form class="needs-validation" novalidate>
+            <form method="post" action="./app/register.php" class="needs-validation" novalidate>
                 <div class="row gx-4 gy-3">
                     <div class="col-sm-6">
                         <label class="form-label" for="reg-fn">First Name</label>
-                        <input class="form-control" type="text" required id="reg-fn">
+                        <input class="form-control" type="text" required id="reg-fn" name="first_name">
                         <div class="invalid-feedback">Please enter your first name!</div>
                     </div>
                     <div class="col-sm-6">
                         <label class="form-label" for="reg-ln">Last Name</label>
-                        <input class="form-control" type="text" required id="reg-ln">
+                        <input class="form-control" type="text" required id="reg-ln" name="last_name">
                         <div class="invalid-feedback">Please enter your last name!</div>
                     </div>
                     <div class="col-sm-6">
                         <label class="form-label" for="reg-email">E-mail Address</label>
-                        <input class="form-control" type="email" required id="reg-email">
+                        <input class="form-control" type="email" required id="reg-email" name="email">
                         <div class="invalid-feedback">Please enter valid email address!</div>
                     </div>
                     <div class="col-sm-6">
                         <label class="form-label" for="reg-phone">Phone Number</label>
-                        <input class="form-control" type="text" required id="reg-phone">
+                        <input class="form-control" type="text" required id="reg-phone" name="phone_number">
                         <div class="invalid-feedback">Please enter your phone number!</div>
                     </div>
                     <div class="col-sm-6">
                         <label class="form-label" for="reg-password">Password</label>
-                        <input class="form-control" type="password" required id="reg-password">
+                        <input class="form-control" type="password" required id="reg-password" name="password">
                         <div class="invalid-feedback">Please enter password!</div>
                     </div>
                     <div class="col-sm-6">
                         <label class="form-label" for="reg-password-confirm">Confirm Password</label>
-                        <input class="form-control" type="password" required id="reg-password-confirm">
+                        <input class="form-control" type="password" required id="reg-password-confirm"
+                            name="confirm_password">
                         <div class="invalid-feedback">Passwords do not match!</div>
                     </div>
                     <div class="col-12 text-end">
