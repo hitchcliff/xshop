@@ -39,10 +39,13 @@ $sql = "INSERT INTO users (
         )";
 
 if ($conn->query($sql)) {
+    login($email, $password);
+
+    // redirect
+    header('Location: ../orders.php');
+
     die("Created account successfully.");
 } else {
     die("Failed to create account.");
 }
 
-echo '<pre>';
-die($sql);

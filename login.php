@@ -17,15 +17,17 @@
                     </div>
                     <hr>
                     <h3 class="fs-base pt-4 pb-2">Or using form below</h3>
-                    <form class="needs-validation" novalidate>
+                    <form method="post" action="./app/signin.php" class="needs-validation" novalidate>
                         <div class="input-group mb-3"><i
                                 class="ci-mail position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
-                            <input class="form-control rounded-start" type="email" placeholder="Email" required>
+                            <input class="form-control rounded-start" type="email" placeholder="Email" required
+                                name="email">
                         </div>
                         <div class="input-group mb-3"><i
                                 class="ci-locked position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
                             <div class="password-toggle w-100">
-                                <input class="form-control" type="password" placeholder="Password" required>
+                                <input class="form-control" type="password" placeholder="Password" required
+                                    name="password">
                                 <label class="password-toggle-btn" aria-label="Show/hide password">
                                     <input class="password-toggle-check" type="checkbox"><span
                                         class="password-toggle-indicator"></span>
