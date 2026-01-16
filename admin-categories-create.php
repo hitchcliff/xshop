@@ -4,14 +4,13 @@
 
 protected_area();
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $redirectUrl = url("/admin-categories-create.php");
 
     $_SESSION["form"]['add_category'] = $_POST; // form data
     $_SESSION["form"]['add_category']["error"] = [""]; // set default container
 
-    $_SESSION["form"]['add_category']["error"]["category_name"] = "Error example";
+    // $_SESSION["form"]['add_category']["error"]["category_name"] = "Error example";
     // print_r($_POST);
 
     header("Location: {$redirectUrl}");
