@@ -14,11 +14,21 @@ $sql = "SELECT * FROM users WHERE email = '{$email}'";
 $stmt = $conn->query($sql);
 
 if ($stmt->num_rows > 0) {
-    die("User email already exists.");
+    alert("danger", "User email already exists.");
+
+    // go back 
+    header("Location: {$_SERVER['HTTP_REFERER']}");
+
+    exit();
 }
 
 if ($password != $confirmPassword) {
-    die("Password did not match.");
+    alert("danger", "Password did not match.");
+
+    // go back 
+    header("Location: {$_SERVER['HTTP_REFERER']}");
+
+    exit();
 }
 
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -41,11 +51,17 @@ $sql = "INSERT INTO users (
 if ($conn->query($sql)) {
     login($email, $password);
 
+
+    alert("success", "Registered successfully");
+
     // redirect
     header('Location: ../orders.php');
 
     die("Created account successfully.");
 } else {
-    die("Failed to create account.");
+    alert("danger", "Failed to create account.");
+
+    // go back 
+    header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 

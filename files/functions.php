@@ -31,3 +31,15 @@ function login($email, $password)
     return true;
 
 }
+
+function setLoginFormData($email, $password)
+{
+    $_SESSION['login_form_data']['email'] = $email;
+    $_SESSION['login_form_data']['password'] = $password;
+}
+
+function alert($type, $message)
+{
+    $_SESSION['alert']['message'] = $message;
+    $_SESSION['alert']['type'] = $type;
+}
