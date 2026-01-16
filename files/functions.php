@@ -43,3 +43,12 @@ function alert($type, $message)
     $_SESSION['alert']['message'] = $message;
     $_SESSION['alert']['type'] = $type;
 }
+
+function is_logged_in()
+{
+    if (isset($_SESSION['user'])) {
+        return true;
+    }
+
+    return false;
+}
