@@ -93,3 +93,29 @@ function is_link_active($link)
         echo 'active';
     }
 }
+
+function text_input($name, $label, $placeholder = "")
+{
+
+    $value = "";
+    $error = "";
+    $error_text = "";
+
+    if (isset($_SESSION["form"]['add_category'])) {
+        if (isset($_SESSION["form"]['add_category'][$name])) {
+            $value = $_SESSION["form"]['add_category'][$name];
+
+            if (isset($_SESSION["form"]['add_category']["error"][$name])) {
+                $error = $_SESSION["form"]['add_category']["error"][$name];
+                $error_text = '<div class="d-flex text-danger mt-2"><i class="material-icons">error</i>&nbsp;' . $error . '</div>';
+            }
+        }
+    }
+
+    echo '
+        <label class="form-label" for="' . $name . '">' . $label . '</label>
+        <input class="form-control" type="text" id="' . $name . '" name="' . $name . '" placeholder="' . $placeholder . '" value="' . $value . '">
+        ' . $error_text . '
+    ';
+
+}

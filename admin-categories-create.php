@@ -1,6 +1,25 @@
 <?php require_once("./files/functions.php"); ?>
 
-<?php protected_area(); ?>
+<?php
+
+protected_area();
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $redirectUrl = url("/admin-categories-create.php");
+
+    $_SESSION["form"]['add_category'] = $_POST; // form data
+    $_SESSION["form"]['add_category']["error"] = [""]; // set default container
+
+    $_SESSION["form"]['add_category']["error"]["category_name"] = "Error example";
+    // print_r($_POST);
+
+    header("Location: {$redirectUrl}");
+
+    die();
+}
+
+?>
 
 <?php require_once("./files/header.php"); ?>
 
@@ -42,11 +61,9 @@
                     <div class="d-sm-flex flex-wrap justify-content-between align-items-center pb-2">
                         <h2 class="h3 py-2 me-2 text-center text-sm-start">Add New Category</h2>
                     </div>
-                    <form>
+                    <form method="post" action="admin-categories-create.php">
                         <div class="mb-3 pb-2">
-                            <label class="form-label" for="unp-product-name">Product name</label>
-                            <input class="form-control" type="text" id="unp-product-name">
-                            <div class="form-text">Maximum 100 characters. No HTML or emoji allowed.</div>
+                            <?php text_input("category_name", "Category name", "Name") ?>
                         </div>
                         <div class="file-drop-area mb-3">
                             <div class="file-drop-icon ci-cloud-upload"></div><span class="file-drop-message">Drag and
