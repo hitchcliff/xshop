@@ -315,9 +315,9 @@
       <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
       <div class="navbar-sticky bg-light">
         <div class="navbar navbar-expand-lg navbar-light">
-          <div class="container"><a class="navbar-brand d-none d-sm-block flex-shrink-0" href="index-2.html"><img
+          <div class="container"><a class="navbar-brand d-none d-sm-block flex-shrink-0" href="<?= url("/") ?>"><img
                 src="img/logo-dark.png" width="142" alt="Cartzilla"></a><a
-              class="navbar-brand d-sm-none flex-shrink-0 me-2" href="index-2.html"><img src="img/logo-icon.png"
+              class="navbar-brand d-sm-none flex-shrink-0 me-2" href="<?= url("/") ?>"><img src="img/logo-icon.png"
                 width="74" alt="Cartzilla"></a>
             <div class="input-group d-none d-lg-flex mx-4">
               <input class="form-control rounded-end pe-5" type="text" placeholder="Search for products"><i

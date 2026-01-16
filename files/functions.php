@@ -7,6 +7,8 @@ if (session_status() == PHP_SESSION_NONE) {
 
 $conn = new mysqli("localhost", "root", '', "xshop");
 
+define("BASE_URL", "http://localhost/xshop");
+
 function login($email, $password)
 {
 
@@ -51,4 +53,34 @@ function is_logged_in()
     }
 
     return false;
+}
+
+function url($path = "/")
+{
+
+    return BASE_URL . $path;
+
+}
+
+function protected_area()
+{
+    if (!isset($_SESSION["user"])) {
+        $redirectUrl = url("/login.php");
+
+        alert("warning", "You must login first to access this page.");
+        header("Location: {$redirectUrl}");
+        die();
+    }
+}
+function logout()
+{
+    if (isset($_SESSION["user"])) {
+
+        unset($_SESSION["user"]);
+
+        $redirectUrl = url("/login.php");
+
+        alert("success", "Logged out successfully.");
+        header("Location: {$redirectUrl}");
+    }
 }
