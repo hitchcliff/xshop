@@ -13,3 +13,14 @@ create table users (
     address VARCHAR(255) NULL,
     user_type VARCHAR(255) null
 );
+
+create table categories (
+    id int AUTO_INCREMENT PRIMARY KEY,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    name VARCHAR(255) NULL,
+    photo VARCHAR(255) NULL,
+    description VARCHAR(255) NULL,
+    parentId VARCHAR(255) NULL
+);
+

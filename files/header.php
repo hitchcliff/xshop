@@ -334,7 +334,7 @@
               </a>
 
               <?php if (is_logged_in()) { ?>
-                <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="orders.php">
+                <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="account.php">
                 <?php } else { ?>
                   <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="#signin-modal" data-bs-toggle="modal">
                   <?php } ?>
