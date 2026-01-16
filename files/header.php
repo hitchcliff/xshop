@@ -29,6 +29,10 @@
   <link rel="stylesheet" media="screen" href="vendor/simplebar/dist/simplebar.min.css" />
   <link rel="stylesheet" media="screen" href="vendor/tiny-slider/dist/tiny-slider.css" />
   <link rel="stylesheet" media="screen" href="vendor/drift-zoom/dist/drift-basic.min.css" />
+  <!-- Font icons -->
+  <link rel="preload" href="assets/icons/cartzilla-icons.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/icons/cartzilla-icons.min.css">
+  <link rel="stylesheet" media="screen" href="css/utilities.css" />
   <!-- Main Theme Styles + Bootstrap-->
   <link rel="stylesheet" media="screen" href="css/theme.min.css">
   <!-- Google Tag Manager-->

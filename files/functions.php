@@ -84,3 +84,12 @@ function logout()
         header("Location: {$redirectUrl}");
     }
 }
+
+function is_link_active($link)
+{
+    $url = $_SERVER['REQUEST_URI'];
+
+    if (strpos($url, $link) !== false) {
+        echo 'active';
+    }
+}

@@ -18,14 +18,22 @@
                 <h3 class="fs-sm mb-0 text-muted">Dashboard</h3>
             </div>
             <ul class="list-unstyled mb-0">
-                <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
-                        href="admin-categories.php"><i class="ci-user opacity-60 me-2"></i>Product categories</a></li>
+                <li class="border-bottom mb-0"><a
+                        class="nav-link-style d-flex align-items-center px-4 py-3 <?php is_link_active('admin-categories.php') ?>"
+                        href="admin-categories.php"><i class="ci-view-grid opacity-60 me-2"></i>Product categories</a>
+                </li>
+                <li class="border-bottom mb-0"><a
+                        class="nav-link-style d-flex align-items-center px-4 py-3 <?php is_link_active('admin-categories-create.php') ?>"
+                        href="admin-categories-create.php"><i class="ci-view-grid opacity-60 me-2"></i>Create
+                        category</a>
+                </li>
             </ul>
             <div class="bg-secondary px-4 py-3">
                 <h3 class="fs-sm mb-0 text-muted">My account</h3>
             </div>
             <ul class="list-unstyled mb-0">
-                <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 active"
+                <li class="border-bottom mb-0"><a
+                        class="nav-link-style d-flex align-items-center px-4 py-3 <?php is_link_active('account.php') ?>"
                         href="account.php"><i class="ci-bag opacity-60 me-2"></i>My orders<span
                             class="fs-sm text-muted ms-auto">1</span></a></li>
                 <li class="border-top mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 navbar-tool"
