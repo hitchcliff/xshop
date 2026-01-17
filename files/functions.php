@@ -132,8 +132,6 @@ function upload_images($files)
     $uploaded_images = array();
 
     foreach ($files as $file) {
-        print_r("<pre>");
-        print_r($file);
 
         if (
             isset($file['name']) &&
@@ -149,13 +147,15 @@ function upload_images($files)
             $res = move_uploaded_file($file['tmp_name'], $destination);
 
             if (!$res) {
-                die("failed");
+                die("Failed to upload file/s");
             }
 
+            $img['src'] = $destination;
 
-            die("success");
+            $uploaded_images[] = $img;
         }
     }
 
 
+    return $uploaded_images;
 }
