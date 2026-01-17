@@ -1,8 +1,15 @@
-<?php require_once("./files/functions.php"); ?>
+<?php
+require_once("./files/functions.php");
+
+?>
+
+<img src="uploads/1.jpg" width="20%" alt="">
+<img src="uploads/2.jpg" width="20%" alt="">
 
 <?php
 
 protected_area();
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $redirectUrl = url("/admin-categories-create.php");
@@ -13,9 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // $_SESSION["form"]['add_category']["error"]["category_name"] = "Error example";
     // print_r($_POST);
 
-    upload_images($_FILES);
+    // $imgs = upload_images($_FILES);
+    create_thumb();
 
     // header("Location: {$redirectUrl}");
+
+    $fileSize = filesize("uploads/1.jpg") / 1000000;
+    echo $fileSize . " " . "mbs";
 
     die();
 }

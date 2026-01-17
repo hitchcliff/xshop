@@ -1,5 +1,9 @@
 <?php
 
+// compress image
+require_once("./files/Zebra_Image.php");
+use stefangabos\Zebra_Image\Zebra_Image;
+
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -8,6 +12,7 @@ if (session_status() == PHP_SESSION_NONE) {
 $conn = new mysqli("localhost", "root", '', "xshop");
 
 define("BASE_URL", "http://localhost/xshop");
+
 
 function login($email, $password)
 {
@@ -129,7 +134,7 @@ function upload_images($files)
         return [];
     }
 
-    $uploaded_images = array();
+    $uploaded_images = [];
 
     foreach ($files as $file) {
 
@@ -158,4 +163,65 @@ function upload_images($files)
 
 
     return $uploaded_images;
+}
+
+function create_thumb()
+{
+    ini_set("memory_limit", "-1");
+
+    $source = "uploads/1.jpg";
+    $target = "uploads/2.jpg";
+    $image = new stefangabos\Zebra_Image\Zebra_Image();
+
+
+    $image->auto_handle_exif_orientation = true;
+    $image->source_path = $source;
+    $image->target_path = $target;
+    $image->preserve_aspect_ratio = true;
+    $image->enlarge_smaller_images = true;
+    $image->preserve_time = true;
+
+    $image->jpeg_quality = 100;
+
+    $width = 100;
+    $height = 100;
+
+    if (!$image->resize($width, $height, ZEBRA_IMAGE_CROP_CENTER)) {
+
+        // if there was an error, let's see what the error is about
+        switch ($image->error) {
+
+            case 1:
+                echo 'Source file could not be found';
+                break;
+            case 2:
+                echo 'Source file is not readable';
+                break;
+            case 3:
+                echo 'Could not write target file';
+                break;
+            case 4:
+                echo 'Unsupported source file type';
+                break;
+            case 5:
+                echo 'Unsupported target file type';
+                break;
+            case 6:
+                echo 'GD library version does not support target file format';
+                break;
+            case 7:
+                echo 'GD library is not installed';
+                break;
+            case 8:
+                echo '"chmod" command is disabled via configuration';
+                break;
+            case 9:
+                echo '"exif_read_data" function is not available';
+                break;
+
+        }
+
+        // if no errors
+    } else
+        echo 'Success!';
 }
