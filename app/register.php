@@ -54,8 +54,11 @@ if ($conn->query($sql)) {
 
     alert("success", "Registered successfully");
 
+
+    $redirectUrl = url('/account.php');
+
     // redirect
-    header('Location: ../orders.php');
+    header("Location: {$redirectUrl}");
 
     die("Created account successfully.");
 } else {
