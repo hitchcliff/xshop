@@ -10,8 +10,10 @@ $loggedIn = login($email, $password);
 if ($loggedIn) {
     alert("success", "Logged in successfully");
 
+    $redirectUrl = url('/account.php');
+
     // redirect
-    header('Location: ../orders.php');
+    header("Location: {$redirectUrl}");
 } else {
     alert("danger", "Wrong email/password");
 

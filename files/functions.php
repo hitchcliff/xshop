@@ -112,7 +112,7 @@ function text_input($name, $label, $placeholder = "")
         }
     }
 
-    echo '
+    return '
         <label class="form-label" for="' . $name . '">' . $label . '</label>
         <input class="form-control" type="text" id="' . $name . '" name="' . $name . '" placeholder="' . $placeholder . '" value="' . $value . '">
         ' . $error_text . '

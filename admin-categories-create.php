@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <form method="post" action="admin-categories-create.php">
                         <div class="mb-3 pb-2">
-                            <?php text_input("category_name", "Category name", "Name") ?>
+                            <?= text_input("category_name", "Category name", "Name") ?>
                         </div>
                         <div class="file-drop-area mb-3">
                             <div class="file-drop-icon ci-cloud-upload"></div><span class="file-drop-message">Drag and

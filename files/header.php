@@ -55,7 +55,7 @@
       style="display: none; visibility: hidden;"></iframe>
   </noscript>
   <!-- Sign in / sign up modal-->
-  <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog">
+  <!-- <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header bg-secondary">
@@ -125,7 +125,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <main class="page-wrapper">
     <!-- Quick View Modal-->
@@ -339,7 +339,7 @@
               <?php if (is_logged_in()) { ?>
                 <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="account.php">
                 <?php } else { ?>
-                  <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="#signin-modal" data-bs-toggle="modal">
+                  <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="login.php">
                   <?php } ?>
                   <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
                   <div class="navbar-tool-text ms-n3">
