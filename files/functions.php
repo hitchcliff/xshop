@@ -148,6 +148,7 @@ function upload_images($files)
             $ext = pathinfo($file["name"], PATHINFO_EXTENSION);
             $file_name = time() . "-" . rand(0, 10000000000) . '.' . $ext;
             $destination = 'uploads/' . $file_name;
+            $thumb_destination = 'uploads/' . 'thumb-' . $file_name;
 
             $res = move_uploaded_file($file['tmp_name'], $destination);
 
@@ -155,7 +156,10 @@ function upload_images($files)
                 die("Failed to upload file/s");
             }
 
+            $thumb_destination = create_thumb(["width" => 100, "height" => 100], $destination, $thumb_destination);
+
             $img['src'] = $destination;
+            $img['thumb'] = $thumb_destination;
 
             $uploaded_images[] = $img;
         }
@@ -165,14 +169,11 @@ function upload_images($files)
     return $uploaded_images;
 }
 
-function create_thumb()
+function create_thumb($size, $source, $target)
 {
     ini_set("memory_limit", "-1");
 
-    $source = "uploads/1.jpg";
-    $target = "uploads/2.jpg";
     $image = new stefangabos\Zebra_Image\Zebra_Image();
-
 
     $image->auto_handle_exif_orientation = true;
     $image->source_path = $source;
@@ -183,14 +184,10 @@ function create_thumb()
 
     $image->jpeg_quality = 100;
 
-    $width = 100;
-    $height = 100;
-
-    if (!$image->resize($width, $height, ZEBRA_IMAGE_CROP_CENTER)) {
+    if (!$image->resize($size['width'], $size['height'], ZEBRA_IMAGE_CROP_CENTER)) {
 
         // if there was an error, let's see what the error is about
         switch ($image->error) {
-
             case 1:
                 echo 'Source file could not be found';
                 break;
@@ -222,6 +219,8 @@ function create_thumb()
         }
 
         // if no errors
-    } else
-        echo 'Success!';
+    } else {
+        return $image->target_path;
+    }
+    ;
 }
