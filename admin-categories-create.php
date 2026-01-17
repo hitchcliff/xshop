@@ -13,7 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // $_SESSION["form"]['add_category']["error"]["category_name"] = "Error example";
     // print_r($_POST);
 
-    header("Location: {$redirectUrl}");
+    upload_images($_FILES);
+
+    // header("Location: {$redirectUrl}");
 
     die();
 }
@@ -60,14 +62,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="d-sm-flex flex-wrap justify-content-between align-items-center pb-2">
                         <h2 class="h3 py-2 me-2 text-center text-sm-start">Add New Category</h2>
                     </div>
-                    <form method="post" action="admin-categories-create.php">
+                    <form method="post" action="admin-categories-create.php" enctype="multipart/form-data">
                         <div class="mb-3 pb-2">
                             <?= text_input("category_name", "Category name", "Name") ?>
                         </div>
                         <div class="file-drop-area mb-3">
                             <div class="file-drop-icon ci-cloud-upload"></div><span class="file-drop-message">Drag and
                                 drop here to upload product screenshot</span>
-                            <input class="file-drop-input" type="file">
+                            <input class="file-drop-input" type="file" name="category_image">
                             <button class="file-drop-btn btn btn-primary btn-sm mb-2" type="button">Or select
                                 file</button>
                             <div class="form-text">1000 x 800px ideal size for hi-res displays</div>
