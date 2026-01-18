@@ -15,22 +15,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // print_r($imgs);
 
     // checking
-    if (isset($_POST['category_name']) || count($imgs) <= 0) {
-
-        print_r(count($imgs));
+    if (isset($_POST['category_name']) || isset($_POST['category_description']) || count($imgs) <= 0) {
 
         if (empty($_POST['category_name'])) {
             $_SESSION["form"]['add_category']["error"]["category_name"] = "Must not be empty";
+        }
+
+        if (empty($_POST['category_description'])) {
+            $_SESSION["form"]['add_category']["error"]["category_description"] = "Must not be empty";
         }
 
         if (count($imgs) <= 0) {
             $_SESSION["form"]['add_category']["error"]["category_image"] = "Must not be empty";
         }
     }
-
-    echo "<pre>";
-    print_r($_SESSION["form"]);
-    // print_r($_POST);
 
     header("Location: {$redirectUrl}");
 
@@ -81,7 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="mb-3 pb-2">
                             <?= text_input("add_category", "category_name", "Category name", "Name") ?>
                         </div>
-                        <?= file_drop_input("category_image", "add_category") ?>
+                        <div class="mb-3">
+                            <?= file_drop_input("add_category", "category_image", ) ?>
+                        </div>
                         <!-- <div class="file-drop-area mb-3">
                             <div class="file-drop-icon ci-cloud-upload"></div><span class="file-drop-message">Drag and
                                 drop here to upload product screenshot</span>
@@ -91,15 +91,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="form-text">1000 x 800px ideal size for hi-res displays</div>
                         </div> -->
                         <div class="mb-3 py-2">
-                            <label class="form-label" for="unp-product-description">Product description</label>
-                            <textarea class="form-control" rows="6" id="unp-product-description"></textarea>
-                            <div class="bg-secondary p-3 fs-ms rounded-bottom"><span
+                            <?= text_area_input("add_category", "category_description", "Product Description", "Description"); ?>
+                            <!-- <div class="bg-secondary p-3 fs-ms rounded-bottom"><span
                                     class="d-inline-block fw-medium me-2 my-1">Markdown supported:</span><em
                                     class="d-inline-block border-end pe-2 me-2 my-1">*Italic*</em><strong
                                     class="d-inline-block border-end pe-2 me-2 my-1">**Bold**</strong><span
                                     class="d-inline-block border-end pe-2 me-2 my-1">- List item</span><span
                                     class="d-inline-block border-end pe-2 me-2 my-1">##Heading##</span><span
-                                    class="d-inline-block">--- Horizontal rule</span></div>
+                                    class="d-inline-block">--- Horizontal rule</span></div> -->
                         </div>
                         <button class="btn btn-primary d-block w-100" type="submit"><i
                                 class="ci-cloud-upload fs-lg me-2"></i>Upload Product</button>
