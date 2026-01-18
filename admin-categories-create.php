@@ -54,11 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header("Location: {$redirectUrl2}");
 
             unset($_SESSION["form"]["add_category"]);
-        } else {
-            alert("danger", "Failed to create category.");
-            header("Location: {$redirectUrl}");
         }
-
+    } else {
+        alert("danger", "Failed to create category.");
+        header("Location: {$redirectUrl}");
     }
 
     die();
