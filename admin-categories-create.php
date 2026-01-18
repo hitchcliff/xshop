@@ -12,25 +12,54 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION["form"]['add_category']["error"] = [""]; // set default container
     $imgs = upload_images($_FILES);
 
-    // print_r($imgs);
+    $errorsLen = 0;
 
     // checking
     if (isset($_POST['category_name']) || isset($_POST['category_description']) || count($imgs) <= 0) {
 
         if (empty($_POST['category_name'])) {
             $_SESSION["form"]['add_category']["error"]["category_name"] = "Must not be empty";
+            $errorsLen++;
         }
 
         if (empty($_POST['category_description'])) {
             $_SESSION["form"]['add_category']["error"]["category_description"] = "Must not be empty";
+            $errorsLen++;
         }
 
         if (count($imgs) <= 0) {
             $_SESSION["form"]['add_category']["error"]["category_image"] = "Must not be empty";
+            $errorsLen++;
         }
+
     }
 
-    header("Location: {$redirectUrl}");
+    // check if has errors
+    if ($errorsLen == 0) {
+        $name = $_POST["category_name"];
+        $description = $_POST["category_description"];
+        $parentId = 0;
+        $imgs = json_encode($imgs);
+        $userId = $_SESSION["user"]["id"];
+
+        $sql = "INSERT INTO categories (name, photo,description, parent_id, user_id)
+        VALUES ('{$name}', '{$imgs}', '$description', $parentId, $userId);
+        ";
+
+        global $conn;
+
+        if ($conn->query($sql)) {
+            $redirectUrl2 = url("/admin-categories.php");
+            alert("success", "Created successfully.");
+            header("Location: {$redirectUrl2}");
+
+            unset($_SESSION["form"]["add_category"]);
+        } else {
+            alert("danger", "Failed to create category.");
+            header("Location: {$redirectUrl}");
+        }
+
+    }
 
     die();
 }

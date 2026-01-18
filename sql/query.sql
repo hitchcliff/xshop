@@ -14,6 +14,8 @@ create table users (
     user_type VARCHAR(255) null
 );
 
+DROP Table IF EXISTS categories;
+
 create table categories (
     id int AUTO_INCREMENT PRIMARY KEY,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -21,6 +23,7 @@ create table categories (
     name VARCHAR(255) NULL,
     photo VARCHAR(255) NULL,
     description VARCHAR(255) NULL,
-    parentId VARCHAR(255) NULL
+    parentId VARCHAR(255) NULL,
+    userId int NOT NULL
 );
 
