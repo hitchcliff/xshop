@@ -1,10 +1,5 @@
 <?php
 
-// compress image
-require_once("./files/Zebra_Image.php");
-use stefangabos\Zebra_Image\Zebra_Image;
-
-
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
