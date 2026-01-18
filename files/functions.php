@@ -94,19 +94,19 @@ function is_link_active($link)
     }
 }
 
-function text_input($name, $label, $placeholder = "")
+function text_input($section, $name, $label, $placeholder = "")
 {
 
     $value = "";
     $error = "";
     $error_text = "";
 
-    if (isset($_SESSION["form"]['add_category'])) {
-        if (isset($_SESSION["form"]['add_category'][$name])) {
-            $value = $_SESSION["form"]['add_category'][$name];
+    if (isset($_SESSION["form"][$section])) {
+        if (isset($_SESSION["form"][$section][$name])) {
+            $value = $_SESSION["form"][$section][$name];
 
-            if (isset($_SESSION["form"]['add_category']["error"][$name])) {
-                $error = $_SESSION["form"]['add_category']["error"][$name];
+            if (isset($_SESSION["form"][$section]["error"][$name])) {
+                $error = $_SESSION["form"][$section]["error"][$name];
                 $error_text = '<div class="d-flex text-danger mt-2"><i class="material-icons">error</i>&nbsp;' . $error . '</div>';
             }
         }
@@ -119,6 +119,34 @@ function text_input($name, $label, $placeholder = "")
     ';
 
 }
+
+function file_drop_input($name, $section)
+{
+
+    $error = "";
+    $error_text = "";
+
+    if (isset($_SESSION["form"][$section])) {
+        if (isset($_SESSION["form"][$section]["error"][$name])) {
+            $error = $_SESSION["form"][$section]["error"][$name];
+            $error_text = '<div class="d-flex text-danger mt-2"><i class="material-icons">error</i>&nbsp;' . $error . '</div>';
+        }
+    }
+
+    return '
+            <div class="file-drop-area mb-3">
+                <div class="file-drop-icon ci-cloud-upload"></div><span class="file-drop-message">Drag and
+                    drop here to upload product screenshot</span>
+                <input class="file-drop-input" type="file" name="' . $name . '">
+                <button class="file-drop-btn btn btn-primary btn-sm mb-2" type="button">Or select
+                    file</button>
+                <div class="form-text">1000 x 800px ideal size for hi-res displays</div>
+            </div>
+        ' . $error_text . '
+    ';
+
+}
+
 
 function upload_images($files)
 {
@@ -148,7 +176,9 @@ function upload_images($files)
             $res = move_uploaded_file($file['tmp_name'], $destination);
 
             if (!$res) {
-                die("Failed to upload file/s");
+                // put in session
+                $_SESSION['upload_error'] = "FAILED TO UPLOAD FILE/S";
+                return [];
             }
 
             $thumb_destination = create_thumb(["width" => 100, "height" => 100], $destination, $thumb_destination);
@@ -180,40 +210,7 @@ function create_thumb($size, $source, $target)
     $image->jpeg_quality = 100;
 
     if (!$image->resize($size['width'], $size['height'], ZEBRA_IMAGE_CROP_CENTER)) {
-
-        // if there was an error, let's see what the error is about
-        switch ($image->error) {
-            case 1:
-                echo 'Source file could not be found';
-                break;
-            case 2:
-                echo 'Source file is not readable';
-                break;
-            case 3:
-                echo 'Could not write target file';
-                break;
-            case 4:
-                echo 'Unsupported source file type';
-                break;
-            case 5:
-                echo 'Unsupported target file type';
-                break;
-            case 6:
-                echo 'GD library version does not support target file format';
-                break;
-            case 7:
-                echo 'GD library is not installed';
-                break;
-            case 8:
-                echo '"chmod" command is disabled via configuration';
-                break;
-            case 9:
-                echo '"exif_read_data" function is not available';
-                break;
-
-        }
-
-        // if no errors
+        return $image->source_path;
     } else {
         return $image->target_path;
     }
