@@ -19,6 +19,10 @@
             </div>
             <ul class="list-unstyled mb-0">
                 <li class="border-bottom mb-0"><a
+                        class="nav-link-style d-flex align-items-center px-4 py-3 <?php is_link_active('create-product.php') ?>"
+                        href="create-product.php"><i class="ci-view-grid opacity-60 me-2"></i>Create product</a>
+                </li>
+                <li class="border-bottom mb-0"><a
                         class="nav-link-style d-flex align-items-center px-4 py-3 <?php is_link_active('admin-categories.php') ?>"
                         href="admin-categories.php"><i class="ci-view-grid opacity-60 me-2"></i>Product categories</a>
                 </li>

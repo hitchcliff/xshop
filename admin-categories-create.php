@@ -13,10 +13,6 @@ foreach ($data as $value) {
     $categories[$value["id"]] = $value["name"];
 }
 
-// echo "<pre>";
-// print_r($categories);
-
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $redirectUrl = url("/admin-categories-create.php");
 
@@ -25,10 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $imgs = upload_images($_FILES);
 
     $errorsLen = 0;
-
-    echo "<pre>";
-    print_r($_POST);
-    die();
 
     // checking
     if (isset($_POST['category_name']) || isset($_POST['category_description']) || count($imgs) <= 0) {
