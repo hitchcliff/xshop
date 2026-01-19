@@ -101,17 +101,16 @@ function select_input($section, $name, $label, $data)
 
     $options = "";
 
-    foreach ($data as $option) {
-        $options .= "<option value='{$option}'>{$option}</option>";
+    foreach ($data as $id => $option) {
+        $options .= "<option value='{$id}'>{$option}</option>";
     }
 
 
     return '
         <label class="form-label" for="' . $name . '">' . $label . '</label>
-        <select class="form-select" id="' . $name . '" name="' . $name . '" >
-            <option value="" disabled selected hidden>Choose a parent category</option>
+        <select class="form-select" id="' . $name . '" name="' . $name . '" value="' . $value . '">
+            <option value="0" selected>Choose a parent category</option>
             ' . $options . '
-
         </select>
         ' . $error_text . '
     ';

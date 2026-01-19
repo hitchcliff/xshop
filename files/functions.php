@@ -10,6 +10,7 @@ define("BASE_URL", "http://localhost/xshop");
 
 require_once "files/inputs.php";
 require_once "files/uploads.php";
+require_once "files/db.php";
 
 function login($email, $password)
 {
