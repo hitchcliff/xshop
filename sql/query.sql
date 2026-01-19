@@ -23,7 +23,7 @@ create table categories (
     name VARCHAR(255) NULL,
     photo VARCHAR(255) NULL,
     description VARCHAR(255) NULL,
-    parentId VARCHAR(255) NULL,
-    userId int NOT NULL
+    parent_id VARCHAR(255) NULL,
+    user_id int NOT NULL
 );
 
