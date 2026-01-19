@@ -242,3 +242,41 @@ function create_thumb($size, $source, $target)
     }
     ;
 }
+
+
+function select_input($section, $name, $label, $data)
+{
+
+    $value = "";
+    $error = "";
+    $error_text = "";
+
+    if (isset($_SESSION["form"][$section])) {
+        if (isset($_SESSION["form"][$section][$name])) {
+            $value = $_SESSION["form"][$section][$name];
+
+            if (isset($_SESSION["form"][$section]["error"][$name])) {
+                $error = $_SESSION["form"][$section]["error"][$name];
+                $error_text = '<div class="d-flex text-danger mt-2"><i class="material-icons">error</i>&nbsp;' . $error . '</div>';
+            }
+        }
+    }
+
+    $options = "";
+
+    foreach ($data as $option) {
+        $options .= "<option value='{$option}'>{$option}</option>";
+    }
+
+
+    return '
+        <label class="form-label" for="' . $name . '">' . $label . '</label>
+        <select class="form-select" id="' . $name . '" name="' . $name . '" >
+            <option value="" disabled selected hidden>Choose a parent category</option>
+            ' . $options . '
+
+        </select>
+        ' . $error_text . '
+    ';
+
+}

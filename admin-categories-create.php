@@ -128,6 +128,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     class="d-inline-block border-end pe-2 me-2 my-1">##Heading##</span><span
                                     class="d-inline-block">--- Horizontal rule</span></div> -->
                         </div>
+
+                        <div class="mb-3 pb-2">
+                            <?= select_input("add_category", "category_parent", "Parent Category", ["One", "Two", "Three"]) ?>
+                        </div>
                         <button class="btn btn-primary d-block w-100" type="submit"><i
                                 class="ci-cloud-upload fs-lg me-2"></i>Upload Product</button>
                     </form>
