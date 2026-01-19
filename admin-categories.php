@@ -1,6 +1,9 @@
 <?php require_once("./files/functions.php"); ?>
 
-<?php protected_area(); ?>
+<?php protected_area();
+
+$categories = db_select("categories", "WHERE 1 ORDER BY id DESC");
+?>
 
 <?php require_once("./files/header.php"); ?>
 
@@ -33,21 +36,53 @@
         <section class="col-lg-8">
             <!-- Toolbar-->
             <div class="d-flex justify-content-between align-items-center pt-lg-2 pb-4 pb-lg-5 mb-lg-3">
-                <div class="d-flex align-items-center">
-                    <label class="d-none d-lg-block fs-sm text-light text-nowrap opacity-75 me-2" for="order-sort">Sort
-                        orders:</label>
-                    <label class="d-lg-none fs-sm text-nowrap opacity-75 me-2" for="order-sort">Sort orders:</label>
-                    <select class="form-select" id="order-sort">
-                        <option>All</option>
-                        <option>Delivered</option>
-                        <option>In Progress</option>
-                        <option>Delayed</option>
-                        <option>Canceled</option>
-                    </select>
-                </div><a class="btn btn-primary btn-sm d-none d-lg-inline-block"><i class="ci-sign-out me-2"
-                        href="./app/logout.php"></i>Sign out</a>
+
             </div>
-            main content goes here
+            <!-- Content-->
+            <section class="pt-lg-4 pb-4 mb-3">
+                <div class="pt-2 px-4 ps-lg-0 pe-xl-5">
+                    <!-- Title-->
+                    <div class="d-sm-flex flex-wrap justify-content-between align-items-center border-bottom">
+                        <h2 class="h3 py-2 me-2 text-center text-sm-start">Product Categories<span
+                                class="badge bg-faded-accent fs-sm text-body align-middle ms-2"><?= count($categories) ?></span>
+                        </h2>
+                    </div>
+                    <?php
+
+                    foreach ($categories as $key => $category) {
+                        $img = json_decode($category['photo'])[0]->thumb;
+
+                        $name = $category['name'];
+
+                        echo '  
+                    <div class="d-block d-sm-flex align-items-center py-4 border-bottom"><a
+                            class="d-block mb-3 mb-sm-0 me-sm-4 ms-sm-0 mx-auto" href="marketplace-single.html"
+                            style="width: 12.5rem;"><img class="rounded-3 object-cover w-100" src="' . $img . '"
+                                alt="Product"></a>
+                        <div class="text-center text-sm-start">
+                            <h3 class="h6 product-title mb-2"><a href="marketplace-single.html">' . $name . '</a></h3>
+                            <div class="d-inline-block text-accent">$18.<small>00</small></div>
+                            <div class="d-inline-block text-muted fs-ms border-start ms-2 ps-2">Sales: <span
+                                    class="fw-medium">26</span></div>
+                            <div class="d-inline-block text-muted fs-ms border-start ms-2 ps-2">Earnings: <span
+                                    class="fw-medium">$327.<small>60</small></span></div>
+                            <div class="d-flex justify-content-center justify-content-sm-start pt-3">
+                                <button class="btn bg-faded-accent btn-icon me-2" type="button" data-bs-toggle="tooltip"
+                                    title="Download"><i class="ci-download text-accent"></i></button>
+                                <button class="btn bg-faded-info btn-icon me-2" type="button" data-bs-toggle="tooltip"
+                                    title="Edit"><i class="ci-edit text-info"></i></button>
+                                <button class="btn bg-faded-danger btn-icon" type="button" data-bs-toggle="tooltip"
+                                    title="Delete"><i class="ci-trash text-danger"></i></button>
+                            </div>
+                        </div>
+                    </div>';
+
+                    }
+
+                    ?>
+
+                </div>
+            </section>
         </section>
     </div>
 </div>
