@@ -53,22 +53,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION["form"]['create_product']["error"]["product_img_1"] = "Must not be empty";
             $errorsLen++;
         }
-
-        // category_select can be empty
-        // no need to check the error
     }
-
-
 
     // check if has errors
     if ($errorsLen == 0) {
+        $name = $_POST["product_name"];
+        $description = $_POST["product_description"];
+        $productPrice = doubleval($_POST["product_price"]);
+        $salePrice = doubleval($_POST["product_sale_price"] ?? $productPrice);
+        $parentId = $_POST["category_select"];
+        $imgs = json_encode($imgs);
+        $userId = $_SESSION["user"]["id"];
 
+
+        $sql = "INSERT INTO products (name, description, photo, category_parent_id, price, sale_price, user_id)
+        values ('$name', '$description', '$imgs', $parentId, $productPrice, $salePrice, $userId);
+        ";
+
+        global $conn;
+
+        if ($conn->query($sql)) {
+            $redirectUrl2 = url("/create-product.php");
+            alert("success", "Created successfully.");
+            header("Location: {$redirectUrl2}");
+
+            unset($_SESSION["form"]["create_product"]);
+        }
     } else {
         alert("danger", "Failed to create category.");
         header("Location: {$redirectUrl}");
     }
-
-
 }
 
 require_once("./files/header.php"); ?>
