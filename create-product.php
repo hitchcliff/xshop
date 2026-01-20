@@ -1,6 +1,9 @@
-<?php require_once("./files/functions.php"); ?>
+<?php
 
-<?php protected_area();
+require_once("./files/functions.php");
+require_once("./files/db.php");
+
+protected_area();
 
 $data = db_select("categories", "WHERE parent_id != 0");
 

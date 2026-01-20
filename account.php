@@ -4,6 +4,7 @@ require_once("files/functions.php");
 protected_area();
 require_once("files/header.php");
 
+
 ?>
 
 
@@ -47,7 +48,7 @@ require_once("files/header.php");
             <option>Delayed</option>
             <option>Canceled</option>
           </select>
-        </div><a class="btn btn-primary btn-sm d-none d-lg-inline-block" href="login.php" onclick="<?= logout() ?>"><i
+        </div><a class="btn btn-primary btn-sm d-none d-lg-inline-block" href='./files/logout.php'><i
             class="ci-sign-out me-2"></i>Sign out</a>
       </div>
       <!-- Orders list-->

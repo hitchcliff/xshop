@@ -2,27 +2,6 @@
 
 require_once "files/functions.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
-
-    $loggedIn = login($email, $password);
-
-    if ($loggedIn) {
-        alert("success", "Logged in successfully");
-
-        $redirectUrl = url('/account.php');
-
-        // redirect
-        header("Location: {$redirectUrl}");
-    } else {
-        alert("danger", "Wrong email/password");
-
-        // go back 
-        header("Location: {$_SERVER['HTTP_REFERER']}");
-    }
-}
-
 require_once("files/header.php");
 
 ?>
@@ -44,7 +23,7 @@ require_once("files/header.php");
                     </div>
                     <hr>
                     <h3 class="fs-base pt-4 pb-2">Or using form below</h3>
-                    <form method="post" action="login.php" class="needs-validation" novalidate>
+                    <form method="post" action="files/signin.php" class="needs-validation" novalidate>
                         <div class="input-group mb-3"><i
                                 class="ci-mail position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
                             <input class="form-control rounded-start" type="email" placeholder="Email" required

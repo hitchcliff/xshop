@@ -41,7 +41,7 @@
                         href="account.php"><i class="ci-bag opacity-60 me-2"></i>My orders<span
                             class="fs-sm text-muted ms-auto">1</span></a></li>
                 <li class="border-top mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 navbar-tool"
-                        role="button" href="./app/logout.php"><i class="ci-sign-out opacity-60 me-2"></i>Sign out</a>
+                        role="button" href="./files/logout.php"><i class="ci-sign-out opacity-60 me-2"></i>Sign out</a>
                 </li>
             </ul>
         </div>

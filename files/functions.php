@@ -7,10 +7,7 @@ if (session_status() == PHP_SESSION_NONE) {
 $conn = new mysqli("localhost", "root", '', "xshop");
 
 define("BASE_URL", "http://localhost/xshop");
-
-require_once "files/inputs.php";
-require_once "files/uploads.php";
-require_once "files/db.php";
+define('SITE_ROOT', '/');
 
 function login($email, $password)
 {

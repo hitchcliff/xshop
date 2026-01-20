@@ -1,4 +1,8 @@
-<?php require_once("./files/functions.php"); ?>
+<?php require_once("./files/functions.php");
+
+require_once("./files/db.php");
+?>
+
 
 <?php protected_area();
 

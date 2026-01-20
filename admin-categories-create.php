@@ -2,6 +2,9 @@
 // compress image
 require_once("./files/Zebra_Image.php");
 require_once("./files/functions.php");
+require_once("./files/db.php");
+require_once("./files/inputs.php");
+require_once("./files/uploads.php");
 
 protected_area();
 
