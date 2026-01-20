@@ -36,7 +36,7 @@ create table products (
     name VARCHAR(255) NULL,
     photo VARCHAR(255) NULL,
     description VARCHAR(255) NULL,
-    category_parent_id VARCHAR(255) NULL,
+    category_id VARCHAR(255) NULL,
     price DOUBLE,
     sale_price DOUBLE NULL,
     user_id int NOT NULL

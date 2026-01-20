@@ -61,13 +61,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $description = $_POST["product_description"];
         $productPrice = doubleval($_POST["product_price"]);
         $salePrice = doubleval($_POST["product_sale_price"] ?? $productPrice);
-        $parentId = $_POST["category_select"];
+        $categoryId = $_POST["category_select"];
         $imgs = json_encode($imgs);
         $userId = $_SESSION["user"]["id"];
 
 
-        $sql = "INSERT INTO products (name, description, photo, category_parent_id, price, sale_price, user_id)
-        values ('$name', '$description', '$imgs', $parentId, $productPrice, $salePrice, $userId);
+        $sql = "INSERT INTO products (name, description, photo, category_id, price, sale_price, user_id)
+        values ('$name', '$description', '$imgs', $categoryId, $productPrice, $salePrice, $userId);
         ";
 
         global $conn;
