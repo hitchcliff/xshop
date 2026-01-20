@@ -1,3 +1,11 @@
 .object-cover {
     object-fit: cover;
 }
+
+.flex {
+    display: flex;
+}
+
+.flex-row {
+    flex-direction: row;
+}

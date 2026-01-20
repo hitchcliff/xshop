@@ -1,8 +1,10 @@
 <?php
 
+require_once "Zebra_Image.php";
+use stefangabos\Zebra_Image\Zebra_Image;
+
 function upload_images($files)
 {
-
     ini_set('memory_limit', '512M');
 
     if ($files == null || empty($files)) {
@@ -30,7 +32,7 @@ function upload_images($files)
             if (!$res) {
                 // put in session
                 $_SESSION['upload_error'] = "FAILED TO UPLOAD FILE/S";
-                return [];
+                return $uploaded_images;
             }
 
             $thumb_destination = create_thumb(["width" => 100, "height" => 100], $destination, $thumb_destination);
@@ -42,7 +44,6 @@ function upload_images($files)
         }
     }
 
-
     return $uploaded_images;
 }
 
@@ -50,7 +51,7 @@ function create_thumb($size, $source, $target)
 {
     ini_set("memory_limit", "-1");
 
-    $image = new stefangabos\Zebra_Image\Zebra_Image();
+    $image = new Zebra_Image();
 
     $image->auto_handle_exif_orientation = true;
     $image->source_path = $source;
@@ -66,7 +67,6 @@ function create_thumb($size, $source, $target)
     } else {
         return $image->target_path;
     }
-    ;
 }
 
 

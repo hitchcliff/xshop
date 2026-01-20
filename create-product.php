@@ -2,6 +2,8 @@
 
 require_once("./files/functions.php");
 require_once("./files/db.php");
+require_once("./files/inputs.php");
+require_once("./files/uploads.php");
 
 protected_area();
 
@@ -13,18 +15,63 @@ foreach ($data as $value) {
     $categories[$value["id"]] = $value["name"];
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    echo "<pre>";
-    print_r($_POST);
-    print_r($_FILES);
+    $redirectUrl = url("/create-product.php");
+
+    $_SESSION["form"]['create_product'] = $_POST; // form data
+    $_SESSION["form"]['create_product']["error"] = [""]; // set default container
+    $imgs = upload_images($_FILES);
+
+
+    $errorsLen = 0;
+
+    // checking
+    if (isset($_POST['product_name']) || isset($_POST['product_description']) || isset($_POST['product_price']) || isset($_POST['category_select']) || count($imgs) <= 0) {
+
+        if (empty($_POST['product_name'])) {
+            $_SESSION["form"]['create_product']["error"]["product_name"] = "Must not be empty";
+            $errorsLen++;
+        }
+
+        if (empty($_POST['product_description'])) {
+            $_SESSION["form"]['create_product']["error"]["product_description"] = "Must not be empty";
+            $errorsLen++;
+        }
+
+        if (empty($_POST['product_price'])) {
+            $_SESSION["form"]['create_product']["error"]["product_price"] = "Must not be empty";
+            $errorsLen++;
+        }
+
+        if ($_POST['category_select'] == 0) {
+            $_SESSION["form"]['create_product']["error"]["category_select"] = "Category is required";
+            $errorsLen++;
+        }
+
+        if (count($imgs) <= 0) {
+            $_SESSION["form"]['create_product']["error"]["product_img_1"] = "Must not be empty";
+            $errorsLen++;
+        }
+
+        // category_select can be empty
+        // no need to check the error
+    }
+
+
+
+    // check if has errors
+    if ($errorsLen == 0) {
+
+    } else {
+        alert("danger", "Failed to create category.");
+        header("Location: {$redirectUrl}");
+    }
+
 
 }
 
-
-?>
-
-<?php require_once("./files/header.php"); ?>
+require_once("./files/header.php"); ?>
 
 
 
@@ -73,52 +120,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <option>Add-Ons</option>
                             </select> -->
                     </div>
-                    <form method="post" action="create-product.php">
+                    <form method="post" action="create-product.php" enctype="multipart/form-data">
                         <div class="mb-3 pb-2">
-                            <label class="form-label" for="unp-product-name">Product name</label>
-                            <input class="form-control" type="text" id="unp-product-name">
-                            <div class="form-text">Maximum 100 characters. No HTML or emoji allowed.</div>
+                            <?= text_input("create_product", "product_name", "Product Name", "Name") ?>
                         </div>
-                        <div class="file-drop-area mb-3">
-                            <div class="file-drop-icon ci-cloud-upload"></div><span class="file-drop-message">Drag and
-                                drop here to upload product screenshot</span>
-                            <input class="file-drop-input" type="file">
-                            <button class="file-drop-btn btn btn-primary btn-sm mb-2" type="button">Or select
-                                file</button>
-                            <div class="form-text">1000 x 800px ideal size for hi-res displays</div>
+                        <div class="flex flex-row mb-3 gap-3">
+                            <?= file_drop_input("create_product", "product_img_1") ?>
+                            <?= file_drop_input("create_product", "product_img_2") ?>
+                        </div>
+                        <div class="flex flex-row mb-3 gap-3">
+                            <?= file_drop_input("create_product", "product_img_3") ?>
+                            <?= file_drop_input("create_product", "product_img_4") ?>
+                        </div>
+                        <div class="flex flex-row mb-3 gap-3">
+                            <?= file_drop_input("create_product", "product_img_5") ?>
+                            <?= file_drop_input("create_product", "product_img_6") ?>
                         </div>
                         <div class="mb-3 py-2">
-                            <label class="form-label" for="unp-product-description">Product description</label>
-                            <textarea class="form-control" rows="6" id="unp-product-description"></textarea>
-                            <div class="bg-secondary p-3 fs-ms rounded-bottom"><span
-                                    class="d-inline-block fw-medium me-2 my-1">Markdown supported:</span><em
-                                    class="d-inline-block border-end pe-2 me-2 my-1">*Italic*</em><strong
-                                    class="d-inline-block border-end pe-2 me-2 my-1">**Bold**</strong><span
-                                    class="d-inline-block border-end pe-2 me-2 my-1">- List item</span><span
-                                    class="d-inline-block border-end pe-2 me-2 my-1">##Heading##</span><span
-                                    class="d-inline-block">--- Horizontal rule</span></div>
+                            <?= text_area_input("create_product", "product_description", "Product Description", "Description") ?>
                         </div>
                         <div class="row">
                             <div class="col-sm-6 mb-3">
-                                <label class="form-label" for="unp-standard-price">Standard license price</label>
-                                <div class="input-group"><span class="input-group-text"><i class="ci-dollar"></i></span>
-                                    <input class="form-control" type="text" id="unp-standard-price">
-                                </div>
-                                <div class="form-text">Average marketplace price for this category is $15.</div>
+                                <?= text_input("create_product", "product_price", "Product Price", "0") ?>
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <label class="form-label" for="unp-extended-price">Extended license price</label>
-                                <div class="input-group"><span class="input-group-text"><i class="ci-dollar"></i></span>
-                                    <input class="form-control" type="text" id="unp-extended-price">
-                                </div>
-                                <div class="form-text">Typically 10x of the Standard license price.</div>
+                                <?= text_input("create_product", "product_sale_price", "Sale Price", "0") ?>
                             </div>
-                        </div>
-                        <div class="mb-3 py-2">
-                            <label class="form-label" for="unp-product-tags">Product tags</label>
-                            <textarea class="form-control" rows="4" id="unp-product-tags"></textarea>
-                            <div class="form-text">Up to 10 keywords that describe your item. Tags should all be in
-                                lowercase and separated by commas.</div>
                         </div>
                         <div class="mb-3 pb2">
                             <?= select_input("create_product", "category_select", "Select category", $categories) ?>

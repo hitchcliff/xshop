@@ -55,6 +55,7 @@ function text_area_input($section, $name, $label, $placeholder = "")
 function file_drop_input($section, $name)
 {
 
+    $value = '';
     $error = "";
     $error_text = "";
 
@@ -63,13 +64,17 @@ function file_drop_input($section, $name)
             $error = $_SESSION["form"][$section]["error"][$name];
             $error_text = '<div class="d-flex text-danger mt-2"><i class="material-icons">error</i>&nbsp;' . $error . '</div>';
         }
+
+        if (isset($_FILES[$name]['full_path'])) {
+            $value = $_FILES[$name]['full_path'];
+        }
     }
 
     return '
             <div class="file-drop-area">
                 <div class="file-drop-icon ci-cloud-upload"></div><span class="file-drop-message">Drag and
                     drop here to upload product screenshot</span>
-                <input class="file-drop-input" type="file" name="' . $name . '">
+                <input class="file-drop-input" type="file" name="' . $name . '" value="' . $value . '">
                 <button class="file-drop-btn btn btn-primary btn-sm mb-2" type="button">Or select
                     file</button>
                 <div class="form-text">1000 x 800px ideal size for hi-res displays</div>
