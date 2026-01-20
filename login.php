@@ -1,4 +1,31 @@
-<?php require_once("./files/header.php"); ?>
+<?php
+
+require_once "files/functions.php";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+
+    $loggedIn = login($email, $password);
+
+    if ($loggedIn) {
+        alert("success", "Logged in successfully");
+
+        $redirectUrl = url('/account.php');
+
+        // redirect
+        header("Location: {$redirectUrl}");
+    } else {
+        alert("danger", "Wrong email/password");
+
+        // go back 
+        header("Location: {$_SERVER['HTTP_REFERER']}");
+    }
+}
+
+require_once("files/header.php");
+
+?>
 
 <div class="container py-4 py-lg-5 my-4">
     <div class="row">
@@ -17,7 +44,7 @@
                     </div>
                     <hr>
                     <h3 class="fs-base pt-4 pb-2">Or using form below</h3>
-                    <form method="post" action="./app/signin.php" class="needs-validation" novalidate>
+                    <form method="post" action="login.php" class="needs-validation" novalidate>
                         <div class="input-group mb-3"><i
                                 class="ci-mail position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
                             <input class="form-control rounded-start" type="email" placeholder="Email" required
@@ -54,7 +81,7 @@
             <h2 class="h4 mb-3">No account? Sign up</h2>
             <p class="fs-sm text-muted mb-4">Registration takes less than a minute but gives you full control over your
                 orders.</p>
-            <form method="post" action="./app/register.php" class="needs-validation" novalidate>
+            <form method="post" action="files/register.php" class="needs-validation" novalidate>
                 <div class="row gx-4 gy-3">
                     <div class="col-sm-6">
                         <label class="form-label" for="reg-fn">First Name</label>

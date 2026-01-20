@@ -1,6 +1,6 @@
 <?php
 
-require_once('../files/functions.php');
+require_once('files/functions.php');
 
 $email = trim($_POST['email']);
 $firstName = trim($_POST['first_name']);

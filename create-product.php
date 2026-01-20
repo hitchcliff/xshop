@@ -2,12 +2,20 @@
 
 <?php protected_area();
 
-$data = db_select("categories", null);
+$data = db_select("categories", "WHERE parent_id != 0");
 
 $categories = [];
 
 foreach ($data as $value) {
     $categories[$value["id"]] = $value["name"];
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    echo "<pre>";
+    print_r($_POST);
+    print_r($_FILES);
+
 }
 
 
@@ -62,7 +70,7 @@ foreach ($data as $value) {
                                 <option>Add-Ons</option>
                             </select> -->
                     </div>
-                    <form>
+                    <form method="post" action="create-product.php">
                         <div class="mb-3 pb-2">
                             <label class="form-label" for="unp-product-name">Product name</label>
                             <input class="form-control" type="text" id="unp-product-name">
