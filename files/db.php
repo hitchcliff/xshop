@@ -19,5 +19,4 @@ function db_select($table, $condition = null)
     }
 
     return $rows;
-
 }
