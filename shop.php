@@ -881,6 +881,7 @@ $data = db_select("products", "WHERE 1 ORDER BY id DESC");
                 <?php
 
                 foreach ($data as $key => $product) {
+                    $id = $product["id"];
                     $name = $product['name'];
                     $categoryId = $product['category_id'];
                     $price = $product['price'];
@@ -896,12 +897,13 @@ $data = db_select("products", "WHERE 1 ORDER BY id DESC");
                     <div class="col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden w-full" href="shop-single-v1.html"><img
+                                data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button>
+                            <a class="card-img-top d-block overflow-hidden w-full" href="product.php?id=<?= $id ?>"><img
                                     class="w-100" src="<?= $img ?>" alt="<?= $name ?>"></a>
                             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1 capitalize"
                                     href="#"><?= $category ?></a>
-                                <h3 class="product-title fs-sm capitalize"><a href="shop-single-v1.html"><?= $name ?></a>
+                                <h3 class="product-title fs-sm capitalize"><a
+                                        href="product.php?id=<?= $id ?>"><?= $name ?></a>
                                 </h3>
                                 <div class="d-flex justify-content-between">
                                     <div class="product-price"><span class="text-accent">$<?= $price ?></span></div>
